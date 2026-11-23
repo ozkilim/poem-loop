@@ -1,0 +1,451 @@
+base_url: http://localhost:8080/v1
+model: Qwen3.6-35B-A3B-UD-Q4_K_M
+disable_thinking: true
+embedding_model: null
+embedding_base_url: null
+chains: 5
+iterations: 40
+base_seed: 42
+temperature: 0.8
+top_p: 0.95
+max_tokens_poem: 800
+max_tokens_feedback: 1500
+request_timeout_s: 300
+max_retries: 3
+judge_knows_goal: false
+early_stop_on_exact_repeat: false
+out_dir: runs/swap/
+workers: 6
+chain_specs:
+- label: G/G start0
+  arm: G/G
+  seed: 42
+  temperature: 0.8
+  start: '**The Quiet Engine**
+
+
+    The sun does not announce its rise,
+
+    It simply spills its gold across the eyes
+
+    Of waking earth, a silent, warm decree
+
+    That night must yield, and shadow flee.
+
+
+    The river does not seek the sea,
+
+    It only flows, as flow must be,
+
+    Through stone and root and sandy bed,
+
+    Carrying the weight of what it has said.
+
+
+    And we, who strive to hold the moment,
+
+    Are but echoes of the element—
+
+    Brief sparks in vast and dark expanse,
+
+    Dancing on water’s slippery glance.
+
+
+    So do not fear the end of day,
+
+    Nor rush the coming of the grey.
+
+    For in the pause, the breath, the space,
+
+    Lies the quiet, steady grace.
+
+
+    We are not here to last forever,
+
+    But to feel, to love, to shiver,
+
+    To be the note, not just the song,
+
+    And know that we belong.'
+  role_models: &id002
+    judge: &id001
+      model: gemma-3-12b-it
+      base_url: http://127.0.0.1:8081/v1
+    rewriter: *id001
+- label: G/G start1
+  arm: G/G
+  seed: 43
+  temperature: 0.8
+  start: '**The Quiet Architecture**
+
+
+    The sun does not shout; it simply arrives,
+
+    Painting gold on the spine of the waking hill,
+
+    A slow, warm truth that the darkness survives,
+
+    Bending the will of the frost to the will
+
+    Of light, which is patient, which knows how to wait,
+
+    Until stone forgets it was born in the cold,
+
+    And the river, unbound by the edge of the gate,
+
+    Turns stories to silence, and secrets to gold.
+
+
+    We are brief as the breath in the lung of the air,
+
+    A spark in the dark, then the ash, then the dust,
+
+    But we hold in our hands the fragile repair
+
+    Of time, in the trust that we place in the rust
+
+    That eats through the iron, the root in the tree,
+
+    The echo that lingers long after the sound,
+
+    The memory of you, wild and free,
+
+    The peace that is only found when you are found.
+
+
+    So let the world spin on its axis of fire,
+
+    Let stars burn out and galaxies fade,
+
+    We are here, just here, in the deep and the higher,
+
+    In the mess and the magic that love has made.
+
+    Not in the grandeur, the monument, or the name,
+
+    But in the quiet space between heartbeats two,
+
+    Where nothing remains but the gentle flame,
+
+    And the world, for a moment, is perfectly true.'
+  role_models: *id002
+- label: G/G start2
+  arm: G/G
+  seed: 44
+  temperature: 0.8
+  start: '**The Quiet Hour**
+
+
+    The sun dips low, a golden coin,
+
+    Into the ocean’s deep embrace,
+
+    The world grows still, the noise declines,
+
+    And shadows stretch across the place.
+
+
+    A single star begins to wake,
+
+    Above the roof, above the pine,
+
+    The moon, a ghost, no longer fake,
+
+    Begins her silver, slow design.
+
+
+    Breathe in the dusk, let go the day,
+
+    The heavy weight, the hurried race.
+
+    Here, in the quiet, find your way,
+
+    To find your soul’s own resting place.'
+  role_models: *id002
+- label: G/Q start0
+  arm: G/Q
+  seed: 42
+  temperature: 0.8
+  start: '**The Quiet Engine**
+
+
+    The sun does not announce its rise,
+
+    It simply spills its gold across the eyes
+
+    Of waking earth, a silent, warm decree
+
+    That night must yield, and shadow flee.
+
+
+    The river does not seek the sea,
+
+    It only flows, as flow must be,
+
+    Through stone and root and sandy bed,
+
+    Carrying the weight of what it has said.
+
+
+    And we, who strive to hold the moment,
+
+    Are but echoes of the element—
+
+    Brief sparks in vast and dark expanse,
+
+    Dancing on water’s slippery glance.
+
+
+    So do not fear the end of day,
+
+    Nor rush the coming of the grey.
+
+    For in the pause, the breath, the space,
+
+    Lies the quiet, steady grace.
+
+
+    We are not here to last forever,
+
+    But to feel, to love, to shiver,
+
+    To be the note, not just the song,
+
+    And know that we belong.'
+  role_models: &id003
+    judge: *id001
+    rewriter: &id004
+      model: Qwen3.6-35B-A3B-UD-Q4_K_M
+- label: G/Q start1
+  arm: G/Q
+  seed: 43
+  temperature: 0.8
+  start: '**The Quiet Architecture**
+
+
+    The sun does not shout; it simply arrives,
+
+    Painting gold on the spine of the waking hill,
+
+    A slow, warm truth that the darkness survives,
+
+    Bending the will of the frost to the will
+
+    Of light, which is patient, which knows how to wait,
+
+    Until stone forgets it was born in the cold,
+
+    And the river, unbound by the edge of the gate,
+
+    Turns stories to silence, and secrets to gold.
+
+
+    We are brief as the breath in the lung of the air,
+
+    A spark in the dark, then the ash, then the dust,
+
+    But we hold in our hands the fragile repair
+
+    Of time, in the trust that we place in the rust
+
+    That eats through the iron, the root in the tree,
+
+    The echo that lingers long after the sound,
+
+    The memory of you, wild and free,
+
+    The peace that is only found when you are found.
+
+
+    So let the world spin on its axis of fire,
+
+    Let stars burn out and galaxies fade,
+
+    We are here, just here, in the deep and the higher,
+
+    In the mess and the magic that love has made.
+
+    Not in the grandeur, the monument, or the name,
+
+    But in the quiet space between heartbeats two,
+
+    Where nothing remains but the gentle flame,
+
+    And the world, for a moment, is perfectly true.'
+  role_models: *id003
+- label: G/Q start2
+  arm: G/Q
+  seed: 44
+  temperature: 0.8
+  start: '**The Quiet Hour**
+
+
+    The sun dips low, a golden coin,
+
+    Into the ocean’s deep embrace,
+
+    The world grows still, the noise declines,
+
+    And shadows stretch across the place.
+
+
+    A single star begins to wake,
+
+    Above the roof, above the pine,
+
+    The moon, a ghost, no longer fake,
+
+    Begins her silver, slow design.
+
+
+    Breathe in the dusk, let go the day,
+
+    The heavy weight, the hurried race.
+
+    Here, in the quiet, find your way,
+
+    To find your soul’s own resting place.'
+  role_models: *id003
+- label: Q/G start0
+  arm: Q/G
+  seed: 42
+  temperature: 0.8
+  start: '**The Quiet Engine**
+
+
+    The sun does not announce its rise,
+
+    It simply spills its gold across the eyes
+
+    Of waking earth, a silent, warm decree
+
+    That night must yield, and shadow flee.
+
+
+    The river does not seek the sea,
+
+    It only flows, as flow must be,
+
+    Through stone and root and sandy bed,
+
+    Carrying the weight of what it has said.
+
+
+    And we, who strive to hold the moment,
+
+    Are but echoes of the element—
+
+    Brief sparks in vast and dark expanse,
+
+    Dancing on water’s slippery glance.
+
+
+    So do not fear the end of day,
+
+    Nor rush the coming of the grey.
+
+    For in the pause, the breath, the space,
+
+    Lies the quiet, steady grace.
+
+
+    We are not here to last forever,
+
+    But to feel, to love, to shiver,
+
+    To be the note, not just the song,
+
+    And know that we belong.'
+  role_models: &id005
+    judge: *id004
+    rewriter: *id001
+- label: Q/G start1
+  arm: Q/G
+  seed: 43
+  temperature: 0.8
+  start: '**The Quiet Architecture**
+
+
+    The sun does not shout; it simply arrives,
+
+    Painting gold on the spine of the waking hill,
+
+    A slow, warm truth that the darkness survives,
+
+    Bending the will of the frost to the will
+
+    Of light, which is patient, which knows how to wait,
+
+    Until stone forgets it was born in the cold,
+
+    And the river, unbound by the edge of the gate,
+
+    Turns stories to silence, and secrets to gold.
+
+
+    We are brief as the breath in the lung of the air,
+
+    A spark in the dark, then the ash, then the dust,
+
+    But we hold in our hands the fragile repair
+
+    Of time, in the trust that we place in the rust
+
+    That eats through the iron, the root in the tree,
+
+    The echo that lingers long after the sound,
+
+    The memory of you, wild and free,
+
+    The peace that is only found when you are found.
+
+
+    So let the world spin on its axis of fire,
+
+    Let stars burn out and galaxies fade,
+
+    We are here, just here, in the deep and the higher,
+
+    In the mess and the magic that love has made.
+
+    Not in the grandeur, the monument, or the name,
+
+    But in the quiet space between heartbeats two,
+
+    Where nothing remains but the gentle flame,
+
+    And the world, for a moment, is perfectly true.'
+  role_models: *id005
+- label: Q/G start2
+  arm: Q/G
+  seed: 44
+  temperature: 0.8
+  start: '**The Quiet Hour**
+
+
+    The sun dips low, a golden coin,
+
+    Into the ocean’s deep embrace,
+
+    The world grows still, the noise declines,
+
+    And shadows stretch across the place.
+
+
+    A single star begins to wake,
+
+    Above the roof, above the pine,
+
+    The moon, a ghost, no longer fake,
+
+    Begins her silver, slow design.
+
+
+    Breathe in the dusk, let go the day,
+
+    The heavy weight, the hurried race.
+
+    Here, in the quiet, find your way,
+
+    To find your soul’s own resting place.'
+  role_models: *id005

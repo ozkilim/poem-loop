@@ -1,0 +1,122 @@
+# strict T=0 control: one request at a time, server otherwise idle; if the map is deterministic the two chains are identical
+base_url: http://localhost:8080/v1
+model: Qwen3.6-35B-A3B-UD-Q4_K_M
+disable_thinking: true
+embedding_model: null
+embedding_base_url: null
+chains: 5
+iterations: 60
+base_seed: 42
+temperature: 0.8
+top_p: 0.95
+max_tokens_poem: 800
+max_tokens_feedback: 1500
+request_timeout_s: 300
+max_retries: 3
+judge_knows_goal: false
+early_stop_on_exact_repeat: false
+out_dir: runs/t0_serial/
+workers: 1
+chain_specs:
+- label: T=0 serial
+  temperature: 0.0
+  seed: 101
+  start: '**The Quiet Engine**
+
+
+    The sun does not announce its rise,
+
+    It simply spills its gold across the eyes
+
+    Of waking earth, a silent, warm decree
+
+    That night must yield, and shadow flee.
+
+
+    The river does not seek the sea,
+
+    It only flows, as flow must be,
+
+    Through stone and root and sandy bed,
+
+    Carrying the weight of what it has said.
+
+
+    And we, who strive to hold the moment,
+
+    Are but echoes of the element—
+
+    Brief sparks in vast and dark expanse,
+
+    Dancing on water’s slippery glance.
+
+
+    So do not fear the end of day,
+
+    Nor rush the coming of the grey.
+
+    For in the pause, the breath, the space,
+
+    Lies the quiet, steady grace.
+
+
+    We are not here to last forever,
+
+    But to feel, to love, to shiver,
+
+    To be the note, not just the song,
+
+    And know that we belong.
+
+    '
+- label: T=0 serial
+  temperature: 0.0
+  seed: 202
+  start: '**The Quiet Engine**
+
+
+    The sun does not announce its rise,
+
+    It simply spills its gold across the eyes
+
+    Of waking earth, a silent, warm decree
+
+    That night must yield, and shadow flee.
+
+
+    The river does not seek the sea,
+
+    It only flows, as flow must be,
+
+    Through stone and root and sandy bed,
+
+    Carrying the weight of what it has said.
+
+
+    And we, who strive to hold the moment,
+
+    Are but echoes of the element—
+
+    Brief sparks in vast and dark expanse,
+
+    Dancing on water’s slippery glance.
+
+
+    So do not fear the end of day,
+
+    Nor rush the coming of the grey.
+
+    For in the pause, the breath, the space,
+
+    Lies the quiet, steady grace.
+
+
+    We are not here to last forever,
+
+    But to feel, to love, to shiver,
+
+    To be the note, not just the song,
+
+    And know that we belong.
+
+    '

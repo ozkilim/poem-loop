@@ -1,0 +1,20 @@
+# Experiment D: the critic may say FINISHED. Same seeds as run 1 (42-46), 60 rounds.
+base_url: http://localhost:8080/v1
+model: Qwen3.6-35B-A3B-UD-Q4_K_M
+disable_thinking: true
+embedding_model: null
+embedding_base_url: null
+chains: 5
+iterations: 60
+base_seed: 42
+temperature: 0.8
+top_p: 0.95
+max_tokens_poem: 800
+max_tokens_feedback: 1500
+request_timeout_s: 300
+max_retries: 3
+judge_knows_goal: false
+early_stop_on_exact_repeat: false
+out_dir: runs/stop_critic/
+workers: 3
+stop_phrase: FINISHED

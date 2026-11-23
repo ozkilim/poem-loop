@@ -1,0 +1,12 @@
+2026-11-07 19:46:02 INFO START run dir /Users/ozkilim/poem-loop/runs/2026-11-07_194602 | model Qwen3.6-35B-A3B-UD-Q4_K_M @ http://localhost:8080/v1 | chains 1 x 5 iterations
+2026-11-07 19:46:02 INFO health check ok: model 'Qwen3.6-35B-A3B-UD-Q4_K_M' answered 'OK.'
+2026-11-07 19:46:02 INFO chain 0: seed 42, writing poem 0
+2026-11-07 19:46:07 INFO chain 0 iter 0: write 4.9s, 142 words
+2026-11-07 19:46:26 INFO chain 0 iter 0/5: judge 19.0s rewrite 4.9s | 142 words | ~2 min left in chain
+2026-11-07 19:46:50 INFO chain 0 iter 1/5: judge 17.9s rewrite 6.0s | 139 words | ~2 min left in chain
+2026-11-07 19:47:16 INFO chain 0 iter 2/5: judge 19.2s rewrite 6.4s | 139 words | ~1 min left in chain
+2026-11-07 19:47:41 INFO chain 0 iter 3/5: judge 19.2s rewrite 6.5s | 138 words | ~1 min left in chain
+2026-11-07 19:48:07 INFO chain 0 iter 4/5: judge 19.2s rewrite 6.4s | 137 words | ~0 min left in chain
+2026-11-07 19:48:13 INFO chain 0: finished at iteration 5 (max_iterations) in 2.2 min
+2026-11-07 19:48:13 INFO ALL DONE in 2.2 min. Next: python analyze.py runs/2026-11-07_194602
+2026-11-07 19:48:13 INFO seed passed to server: True

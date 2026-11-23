@@ -1,0 +1,4 @@
+2026-11-07 19:53:06 INFO START run dir /Users/ozkilim/poem-loop/runs/2026-11-07_195306 | model qwen3:14b @ http://localhost:8080/v1 | chains 1 x 1 iterations
+2026-11-07 19:53:06 ERROR HEALTH CHECK FAILED: Model 'qwen3:14b' not found on http://localhost:8080/v1.
+  Available: Qwen3-0.6B-Q4_K_M, Qwen3.6-35B-A3B-UD-Q4_K_M, Qwen3.6-35B-A3B-UD-Q5_K_XL
+  Set `model:` in config.yaml to one of these.

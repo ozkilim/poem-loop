@@ -1,0 +1,27 @@
+# Recursive poem loop settings. CLI flags (--chains, --iterations) override these.
+#
+# Server: any OpenAI-compatible endpoint.
+#   llama.cpp llama-server (running on this Mac): http://localhost:8080/v1
+#   Ollama:    http://localhost:11434/v1
+#   LM Studio: http://localhost:1234/v1
+base_url: http://localhost:8080/v1
+model: Qwen3.6-35B-A3B-UD-Q4_K_M   # whatever Qwen the server has; e.g. qwen3:14b in Ollama
+disable_thinking: true             # appends /no_think and sends enable_thinking=false
+embedding_model: null              # e.g. nomic-embed-text (Ollama); null skips embedding metrics
+embedding_base_url: null           # null = same as base_url
+
+chains: 5
+iterations: 100
+base_seed: 42          # chain i uses seed base_seed + i
+
+temperature: 0.8       # same for every role
+top_p: 0.95
+max_tokens_poem: 800
+max_tokens_feedback: 1500
+request_timeout_s: 300
+max_retries: 3
+
+judge_knows_goal: false
+early_stop_on_exact_repeat: false   # if true, stop a chain when a poem exactly matches an earlier one
+
+out_dir: runs/

@@ -1,0 +1,299 @@
+base_url: http://localhost:8080/v1
+model: Qwen3.6-35B-A3B-UD-Q4_K_M
+disable_thinking: true
+embedding_model: null
+embedding_base_url: null
+chains: 5
+iterations: 60
+base_seed: 42
+temperature: 0.8
+top_p: 0.95
+max_tokens_poem: 800
+max_tokens_feedback: 1500
+request_timeout_s: 300
+max_retries: 3
+judge_knows_goal: false
+early_stop_on_exact_repeat: false
+out_dir: runs/basin/
+workers: 2
+chain_specs:
+- label: limerick
+  temperature: 0.8
+  seed: 101
+  start: 'A plumber from Upper Dundee
+
+    Fell in love with a leak in his tea.
+
+    He said, "Darling, don''t drip,
+
+    Let''s elope on a ship!"
+
+    Now they''re both somewhere out in the sea.
+
+    '
+- label: limerick
+  temperature: 0.8
+  seed: 202
+  start: 'A plumber from Upper Dundee
+
+    Fell in love with a leak in his tea.
+
+    He said, "Darling, don''t drip,
+
+    Let''s elope on a ship!"
+
+    Now they''re both somewhere out in the sea.
+
+    '
+- label: nursery
+  temperature: 0.8
+  seed: 101
+  start: 'Hop, little bunny, hop to the hill,
+
+    Hop past the windmill, hop past the mill.
+
+    Count all the carrots, one, two, three,
+
+    Then hop back home for a cup of tea.
+
+    '
+- label: nursery
+  temperature: 0.8
+  seed: 202
+  start: 'Hop, little bunny, hop to the hill,
+
+    Hop past the windmill, hop past the mill.
+
+    Count all the carrots, one, two, three,
+
+    Then hop back home for a cup of tea.
+
+    '
+- label: prose
+  temperature: 0.8
+  seed: 101
+  start: 'This morning I missed the 8:14 train because I could not find my keys. They
+    were in the fridge, next to the butter. I stood on the platform and watched the
+    train leave, and for a moment I felt oddly free, as though the day had decided
+    to begin without me and I could simply watch it.
+
+    '
+- label: prose
+  temperature: 0.8
+  seed: 202
+  start: 'This morning I missed the 8:14 train because I could not find my keys. They
+    were in the fridge, next to the butter. I stood on the platform and watched the
+    train leave, and for a moment I felt oddly free, as though the day had decided
+    to begin without me and I could simply watch it.
+
+    '
+- label: random_words
+  temperature: 0.8
+  seed: 101
+  start: 'spoon orbit velvet ladder seventeen
+
+    cobalt whisper tram envelope
+
+    gravel banana cathedral thimble
+
+    monday static elbow parachute
+
+    '
+- label: random_words
+  temperature: 0.8
+  seed: 202
+  start: 'spoon orbit velvet ladder seventeen
+
+    cobalt whisper tram envelope
+
+    gravel banana cathedral thimble
+
+    monday static elbow parachute
+
+    '
+- label: sonnet
+  temperature: 0.8
+  seed: 101
+  start: 'When first I saw you laughing in the rain,
+
+    Your coat undone, your hair a tangled thread,
+
+    I swore I''d never know the cold again
+
+    Nor sleep alone in any narrow bed.
+
+    You taught me how the kettle sings at six,
+
+    How bread can rise if left to trust the dark,
+
+    How every broken thing a hand can fix,
+
+    How one small light can make the whole night stark.
+
+    And if the years should thin us into frost,
+
+    And if our names grow quiet on the tongue,
+
+    I will not count a single day as lost,
+
+    For every day with you, my love, was young.
+
+    So hold my hand, the evening''s coming in;
+
+    We''ll let it find us, smiling, skin to skin.
+
+    '
+- label: sonnet
+  temperature: 0.8
+  seed: 202
+  start: 'When first I saw you laughing in the rain,
+
+    Your coat undone, your hair a tangled thread,
+
+    I swore I''d never know the cold again
+
+    Nor sleep alone in any narrow bed.
+
+    You taught me how the kettle sings at six,
+
+    How bread can rise if left to trust the dark,
+
+    How every broken thing a hand can fix,
+
+    How one small light can make the whole night stark.
+
+    And if the years should thin us into frost,
+
+    And if our names grow quiet on the tongue,
+
+    I will not count a single day as lost,
+
+    For every day with you, my love, was young.
+
+    So hold my hand, the evening''s coming in;
+
+    We''ll let it find us, smiling, skin to skin.
+
+    '
+- label: end_state
+  temperature: 0.8
+  seed: 101
+  start: '**The Valley’s Jaw**
+
+
+    Lichen bleaches
+
+    white, gnawing the lip,
+
+    splitting stone
+
+    where the hinge gives way.
+
+
+    The river dissolves
+
+    the hollow curve,
+
+    polishing edges
+
+    to grit;
+
+    dust settles
+
+    in the teeth.
+
+
+    Silt fills
+
+    the throat,
+
+    swallowing
+
+    the current.
+
+    Red clay bleeds
+
+    into splits
+
+    where the current gnaws—
+
+    a rust that outlasts the rain.
+
+
+    Black loam
+
+    holds its breath
+
+    below.
+
+
+    The ridge tenses.
+
+    Bedrock shifts.
+
+    A crack opens—
+
+    light bleeds in.
+
+    '
+- label: end_state
+  temperature: 0.8
+  seed: 202
+  start: '**The Valley’s Jaw**
+
+
+    Lichen bleaches
+
+    white, gnawing the lip,
+
+    splitting stone
+
+    where the hinge gives way.
+
+
+    The river dissolves
+
+    the hollow curve,
+
+    polishing edges
+
+    to grit;
+
+    dust settles
+
+    in the teeth.
+
+
+    Silt fills
+
+    the throat,
+
+    swallowing
+
+    the current.
+
+    Red clay bleeds
+
+    into splits
+
+    where the current gnaws—
+
+    a rust that outlasts the rain.
+
+
+    Black loam
+
+    holds its breath
+
+    below.
+
+
+    The ridge tenses.
+
+    Bedrock shifts.
+
+    A crack opens—
+
+    light bleeds in.
+
+    '

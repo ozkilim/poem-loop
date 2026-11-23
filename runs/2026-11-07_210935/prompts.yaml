@@ -1,0 +1,39 @@
+# All prompts. Edit here; no code changes needed.
+# Placeholders: {poem}, {feedback}. No system prompt unless `system` is set.
+
+system: null
+
+writer: |-
+  Write the perfect poem.
+
+judge: |-
+  Here is a poem.
+
+  <poem>
+  {poem}
+  </poem>
+
+  Give your honest, subjective feedback on this poem and how it could be better.
+
+# Used instead of `judge` when config judge_knows_goal: true
+judge_knows_goal: |-
+  Here is a poem. The goal is the perfect poem.
+
+  <poem>
+  {poem}
+  </poem>
+
+  Give your honest, subjective feedback on this poem and how it could be better.
+
+rewriter: |-
+  Here is a poem and some feedback on it.
+
+  <poem>
+  {poem}
+  </poem>
+
+  <feedback>
+  {feedback}
+  </feedback>
+
+  Rewrite the poem using the feedback. The goal is the perfect poem. Output only the poem, with an optional title. No notes or explanation.

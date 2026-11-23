@@ -1,0 +1,171 @@
+2026-11-09 20:57:48 INFO START run dir /Users/ozkilim/poem-loop/runs/swap/2026-11-09_205748 | model Qwen3.6-35B-A3B-UD-Q4_K_M @ http://localhost:8080/v1 | chains 9 x 40 iterations
+2026-11-09 20:57:48 INFO health check ok: model 'Qwen3.6-35B-A3B-UD-Q4_K_M' answered 'OK.'
+2026-11-09 20:57:48 INFO running 9 chains with 6 parallel workers
+2026-11-09 20:57:48 INFO chain 0 (G/G start0): seed 42, T=0.8, given poem 0
+2026-11-09 20:57:48 INFO chain 1 (G/G start1): seed 43, T=0.8, given poem 0
+2026-11-09 20:57:48 INFO chain 2 (G/G start2): seed 44, T=0.8, given poem 0
+2026-11-09 20:57:48 INFO chain 4 (G/Q start1): seed 43, T=0.8, given poem 0
+2026-11-09 20:57:48 INFO chain 3 (G/Q start0): seed 42, T=0.8, given poem 0
+2026-11-09 20:57:48 INFO chain 5 (G/Q start2): seed 44, T=0.8, given poem 0
+2026-11-09 20:59:31 INFO chain 3 iter 0/40: judge 103.3s rewrite 0.0s | 142 words | ~69 min left in chain
+2026-11-09 20:59:52 INFO chain 0 iter 0/40: judge 124.0s rewrite 0.0s | 142 words | ~83 min left in chain
+2026-11-09 21:00:26 INFO chain 5 iter 0/40: judge 158.1s rewrite 0.0s | 80 words | ~105 min left in chain
+2026-11-09 21:00:26 INFO chain 2 iter 0/40: judge 158.1s rewrite 0.0s | 80 words | ~105 min left in chain
+2026-11-09 21:02:11 INFO chain 1 iter 0/40: judge 263.6s rewrite 0.0s | 223 words | ~176 min left in chain
+2026-11-09 21:02:31 INFO chain 4 iter 0/40: judge 283.4s rewrite 0.0s | 223 words | ~189 min left in chain
+2026-11-09 21:02:46 INFO chain 3 iter 1/40: judge 170.3s rewrite 24.8s | 138 words | ~97 min left in chain
+2026-11-09 21:04:21 INFO chain 5 iter 1/40: judge 216.4s rewrite 18.8s | 76 words | ~128 min left in chain
+2026-11-09 21:04:50 INFO chain 0 iter 1/40: judge 230.3s rewrite 68.5s | 140 words | ~137 min left in chain
+2026-11-09 21:05:28 INFO chain 2 iter 1/40: judge 243.5s rewrite 59.0s | 95 words | ~150 min left in chain
+2026-11-09 21:05:38 INFO chain 3 iter 2/40: judge 140.2s rewrite 31.8s | 130 words | ~99 min left in chain
+2026-11-09 21:07:06 INFO chain 4 iter 1/40: judge 227.8s rewrite 46.9s | 222 words | ~181 min left in chain
+2026-11-09 21:07:44 INFO chain 1 iter 1/40: judge 251.5s rewrite 80.9s | 208 words | ~194 min left in chain
+2026-11-09 21:08:19 INFO chain 5 iter 2/40: judge 221.2s rewrite 16.6s | 78 words | ~133 min left in chain
+2026-11-09 21:09:14 INFO chain 3 iter 3/40: judge 187.8s rewrite 27.8s | 147 words | ~106 min left in chain
+2026-11-09 21:09:34 INFO chain 0 iter 2/40: judge 202.9s rewrite 80.6s | 130 words | ~149 min left in chain
+2026-11-09 21:09:54 INFO chain 2 iter 2/40: judge 193.4s rewrite 72.3s | 113 words | ~153 min left in chain
+2026-11-09 21:11:48 INFO chain 4 iter 2/40: judge 243.5s rewrite 38.6s | 258 words | ~177 min left in chain
+2026-11-09 21:11:59 INFO chain 5 iter 3/40: judge 200.3s rewrite 19.5s | 76 words | ~131 min left in chain
+2026-11-09 21:12:20 INFO chain 1 iter 2/40: judge 193.4s rewrite 83.0s | 224 words | ~184 min left in chain
+2026-11-09 21:12:52 INFO chain 3 iter 4/40: judge 194.3s rewrite 23.6s | 154 words | ~108 min left in chain
+2026-11-09 21:14:17 INFO chain 0 iter 3/40: judge 233.9s rewrite 49.3s | 128 words | ~153 min left in chain
+2026-11-09 21:14:54 INFO chain 2 iter 3/40: judge 150.1s rewrite 150.3s | 108 words | ~158 min left in chain
+2026-11-09 21:15:01 INFO chain 5 iter 4/40: judge 161.9s rewrite 20.3s | 75 words | ~124 min left in chain
+2026-11-09 21:16:01 INFO chain 4 iter 3/40: judge 215.0s rewrite 37.9s | 250 words | ~169 min left in chain
+2026-11-09 21:17:08 INFO chain 1 iter 3/40: judge 233.2s rewrite 54.7s | 210 words | ~179 min left in chain
+2026-11-09 21:17:37 INFO chain 3 iter 5/40: judge 261.1s rewrite 24.6s | 170 words | ~116 min left in chain
+2026-11-09 21:18:18 INFO chain 0 iter 4/40: judge 165.1s rewrite 75.9s | 126 words | ~148 min left in chain
+2026-11-09 21:19:12 INFO chain 5 iter 5/40: judge 232.6s rewrite 18.4s | 74 words | ~125 min left in chain
+2026-11-09 21:19:53 INFO chain 2 iter 4/40: judge 228.6s rewrite 69.7s | 116 words | ~159 min left in chain
+2026-11-09 21:20:17 INFO chain 4 iter 4/40: judge 219.7s rewrite 36.2s | 247 words | ~162 min left in chain
+2026-11-09 21:21:43 INFO chain 3 iter 6/40: judge 215.1s rewrite 30.8s | 172 words | ~116 min left in chain
+2026-11-09 21:22:07 INFO chain 5 iter 6/40: judge 155.8s rewrite 19.8s | 77 words | ~118 min left in chain
+2026-11-09 21:22:25 INFO chain 1 iter 4/40: judge 203.5s rewrite 113.2s | 196 words | ~177 min left in chain
+2026-11-09 21:22:56 INFO chain 0 iter 5/40: judge 190.4s rewrite 87.0s | 124 words | ~147 min left in chain
+2026-11-09 21:24:30 INFO chain 4 iter 5/40: judge 218.2s rewrite 35.1s | 212 words | ~156 min left in chain
+2026-11-09 21:24:45 INFO chain 2 iter 5/40: judge 144.3s rewrite 147.6s | 112 words | ~157 min left in chain
+2026-11-09 21:25:00 INFO chain 3 iter 7/40: judge 163.9s rewrite 32.4s | 170 words | ~112 min left in chain
+2026-11-09 21:25:32 INFO chain 5 iter 7/40: judge 190.9s rewrite 14.0s | 78 words | ~114 min left in chain
+2026-11-09 21:27:48 INFO chain 2 iter 6/40: judge 128.8s rewrite 54.5s | 115 words | ~146 min left in chain
+2026-11-09 21:27:56 INFO chain 0 iter 6/40: judge 148.6s rewrite 151.9s | 127 words | ~146 min left in chain
+2026-11-09 21:28:02 INFO chain 3 iter 8/40: judge 153.2s rewrite 29.3s | 165 words | ~108 min left in chain
+2026-11-09 21:28:11 INFO chain 4 iter 6/40: judge 179.3s rewrite 41.5s | 211 words | ~148 min left in chain
+2026-11-09 21:30:31 INFO chain 5 iter 8/40: judge 288.7s rewrite 10.5s | 76 words | ~116 min left in chain
+2026-11-09 21:30:37 INFO chain 1 iter 5/40: judge 295.2s rewrite 197.2s | 196 words | ~191 min left in chain
+2026-11-09 21:31:05 INFO chain 3 iter 9/40: judge 138.3s rewrite 44.5s | 167 words | ~103 min left in chain
+2026-11-09 21:31:29 INFO chain 0 iter 7/40: judge 161.9s rewrite 50.9s | 122 words | ~139 min left in chain
+2026-11-09 21:33:06 INFO chain 4 iter 7/40: judge 256.6s rewrite 38.0s | 210 words | ~146 min left in chain
+2026-11-09 21:33:14 INFO chain 2 iter 7/40: judge 262.9s rewrite 63.0s | 136 words | ~146 min left in chain
+2026-11-09 21:33:59 INFO chain 5 iter 9/40: judge 195.4s rewrite 12.2s | 78 words | ~112 min left in chain
+2026-11-09 21:34:59 INFO chain 3 iter 10/40: judge 202.8s rewrite 31.6s | 163 words | ~101 min left in chain
+2026-11-09 21:35:44 INFO chain 0 iter 8/40: judge 201.4s rewrite 53.3s | 119 words | ~135 min left in chain
+2026-11-09 21:35:53 INFO chain 1 iter 6/40: judge 241.5s rewrite 74.1s | 187 words | ~185 min left in chain
+2026-11-09 21:37:07 INFO chain 4 iter 8/40: judge 211.5s rewrite 30.1s | 206 words | ~140 min left in chain
+2026-11-09 21:37:40 INFO chain 5 iter 10/40: judge 200.7s rewrite 20.4s | 77 words | ~109 min left in chain
+2026-11-09 21:38:21 INFO chain 2 iter 8/40: judge 226.8s rewrite 80.9s | 133 words | ~144 min left in chain
+2026-11-09 21:38:47 INFO chain 3 iter 11/40: judge 196.2s rewrite 31.0s | 176 words | ~99 min left in chain
+2026-11-09 21:40:27 INFO chain 4 iter 9/40: judge 165.6s rewrite 34.0s | 201 words | ~132 min left in chain
+2026-11-09 21:40:52 INFO chain 5 iter 11/40: judge 177.9s rewrite 13.8s | 76 words | ~104 min left in chain
+2026-11-09 21:41:14 INFO chain 0 iter 9/40: judge 204.0s rewrite 126.7s | 122 words | ~135 min left in chain
+2026-11-09 21:41:56 INFO chain 1 iter 7/40: judge 204.8s rewrite 158.5s | 194 words | ~182 min left in chain
+2026-11-09 21:42:57 INFO chain 3 iter 12/40: judge 217.2s rewrite 33.4s | 170 words | ~97 min left in chain
+2026-11-09 21:43:20 INFO chain 2 iter 9/40: judge 237.2s rewrite 61.3s | 131 words | ~141 min left in chain
+2026-11-09 21:44:07 INFO chain 4 iter 10/40: judge 187.4s rewrite 32.4s | 183 words | ~126 min left in chain
+2026-11-09 21:44:26 INFO chain 5 iter 12/40: judge 195.0s rewrite 18.6s | 76 words | ~100 min left in chain
+2026-11-09 21:46:48 INFO chain 2 iter 10/40: judge 146.5s rewrite 61.6s | 138 words | ~134 min left in chain
+2026-11-09 21:46:57 INFO chain 1 iter 8/40: judge 158.2s rewrite 142.9s | 211 words | ~175 min left in chain
+2026-11-09 21:46:58 INFO chain 3 iter 13/40: judge 207.9s rewrite 33.2s | 170 words | ~95 min left in chain
+2026-11-09 21:47:36 INFO chain 0 iter 10/40: judge 234.7s rewrite 146.5s | 126 words | ~136 min left in chain
+2026-11-09 21:49:24 INFO chain 4 iter 11/40: judge 292.3s rewrite 25.0s | 180 words | ~125 min left in chain
+2026-11-09 21:50:46 INFO chain 3 iter 14/40: judge 192.5s rewrite 35.0s | 167 words | ~92 min left in chain
+2026-11-09 21:51:28 INFO chain 2 iter 11/40: judge 221.1s rewrite 59.1s | 159 words | ~130 min left in chain
+2026-11-09 21:52:07 INFO chain 1 iter 9/40: judge 224.1s rewrite 86.3s | 201 words | ~168 min left in chain
+2026-11-09 21:52:59 INFO chain 0 iter 11/40: judge 240.6s rewrite 82.7s | 126 words | ~133 min left in chain
+2026-11-09 21:53:22 INFO chain 5 iter 13/40: judge 216.4s rewrite 18.1s | 79 words | ~107 min left in chain
+2026-11-09 21:54:12 INFO chain 4 iter 12/40: judge 262.6s rewrite 25.7s | 162 words | ~122 min left in chain
+2026-11-09 21:55:11 INFO chain 3 iter 15/40: judge 233.9s rewrite 31.4s | 166 words | ~90 min left in chain
+2026-11-09 21:56:43 INFO chain 5 iter 14/40: judge 180.2s rewrite 21.1s | 81 words | ~102 min left in chain
+2026-11-09 21:56:43 INFO chain 2 iter 12/40: judge 178.0s rewrite 137.0s | 162 words | ~127 min left in chain
+2026-11-09 21:57:10 INFO chain 1 iter 10/40: judge 166.7s rewrite 136.4s | 208 words | ~162 min left in chain
+2026-11-09 21:58:06 INFO chain 0 iter 12/40: judge 217.8s rewrite 89.9s | 126 words | ~130 min left in chain
+2026-11-09 21:59:14 INFO chain 4 iter 13/40: judge 283.8s rewrite 18.3s | 172 words | ~119 min left in chain
+2026-11-09 21:59:42 INFO chain 3 iter 16/40: judge 239.9s rewrite 31.2s | 171 words | ~87 min left in chain
+2026-11-09 22:00:49 INFO chain 5 iter 15/40: judge 224.2s rewrite 21.1s | 81 words | ~98 min left in chain
+2026-11-09 22:01:21 INFO chain 2 iter 13/40: judge 214.0s rewrite 64.0s | 157 words | ~123 min left in chain
+2026-11-09 22:02:10 INFO chain 4 iter 14/40: judge 134.8s rewrite 40.4s | 167 words | ~112 min left in chain
+2026-11-09 22:02:17 INFO chain 1 iter 11/40: judge 207.4s rewrite 98.9s | 184 words | ~156 min left in chain
+2026-11-09 22:03:40 INFO chain 0 iter 13/40: judge 223.9s rewrite 109.3s | 125 words | ~127 min left in chain
+2026-11-09 22:04:09 INFO chain 3 iter 17/40: judge 237.2s rewrite 29.1s | 170 words | ~85 min left in chain
+2026-11-09 22:05:17 INFO chain 5 iter 16/40: judge 248.8s rewrite 19.2s | 83 words | ~95 min left in chain
+2026-11-09 22:06:19 INFO chain 4 iter 15/40: judge 219.4s rewrite 29.7s | 190 words | ~107 min left in chain
+2026-11-09 22:06:38 INFO chain 2 iter 14/40: judge 218.7s rewrite 97.5s | 171 words | ~119 min left in chain
+2026-11-09 22:07:13 INFO chain 1 iter 12/40: judge 207.1s rewrite 89.5s | 190 words | ~150 min left in chain
+2026-11-09 22:07:57 INFO chain 3 iter 18/40: judge 193.1s rewrite 35.7s | 170 words | ~81 min left in chain
+2026-11-09 22:09:10 INFO chain 0 iter 14/40: judge 264.0s rewrite 66.6s | 127 words | ~124 min left in chain
+2026-11-09 22:09:18 INFO chain 5 iter 17/40: judge 221.0s rewrite 20.1s | 81 words | ~91 min left in chain
+2026-11-09 22:10:33 INFO chain 4 iter 16/40: judge 226.7s rewrite 27.9s | 185 words | ~103 min left in chain
+2026-11-09 22:11:37 INFO chain 2 iter 15/40: judge 224.9s rewrite 74.9s | 172 words | ~115 min left in chain
+2026-11-09 22:11:43 INFO chain 3 iter 19/40: judge 192.0s rewrite 33.4s | 171 words | ~78 min left in chain
+2026-11-09 22:12:01 INFO chain 1 iter 13/40: judge 192.0s rewrite 95.3s | 210 words | ~143 min left in chain
+2026-11-11 19:00:36 INFO RESUME run dir runs/swap/2026-11-09_205748 | model Qwen3.6-35B-A3B-UD-Q4_K_M @ http://localhost:8080/v1 | chains 9 x 40 iterations
+2026-11-11 19:00:36 INFO health check ok: model 'Qwen3.6-35B-A3B-UD-Q4_K_M' answered 'OK.'
+2026-11-11 19:00:36 INFO running 9 chains with 6 parallel workers
+2026-11-11 19:00:36 INFO chain 1: resuming with rewrite of iteration 13
+2026-11-11 19:00:36 INFO chain 0: resuming at iteration 15
+2026-11-11 19:00:36 INFO chain 5: resuming at iteration 18
+2026-11-11 19:00:36 INFO chain 4: resuming at iteration 17
+2026-11-11 19:00:36 INFO chain 3: resuming at iteration 20
+2026-11-11 19:00:36 INFO chain 2: resuming at iteration 16
+2026-11-11 19:03:03 INFO chain 2 iter 16/40: judge 147.1s rewrite 63.0s | 168 words | ~59 min left in chain
+2026-11-11 19:03:11 INFO chain 5 iter 18/40: judge 154.7s rewrite 20.3s | 86 words | ~57 min left in chain
+2026-11-11 19:03:22 INFO chain 3 iter 20/40: judge 165.3s rewrite 34.8s | 174 words | ~55 min left in chain
+2026-11-11 19:04:03 INFO chain 0 iter 15/40: judge 206.6s rewrite 123.8s | 142 words | ~86 min left in chain
+2026-11-11 19:06:22 INFO chain 3 iter 21/40: judge 144.0s rewrite 36.9s | 137 words | ~55 min left in chain
+2026-11-11 19:06:49 INFO chain 5 iter 19/40: judge 181.2s rewrite 36.7s | 86 words | ~65 min left in chain
+2026-11-11 19:07:02 INFO chain 2 iter 17/40: judge 181.2s rewrite 57.7s | 135 words | ~74 min left in chain
+2026-11-11 19:08:50 INFO chain 1 iter 14/40: judge 275.5s rewrite 218.4s | 202 words | ~214 min left in chain
+2026-11-11 19:09:04 INFO chain 4 iter 17/40: judge 205.8s rewrite 33.4s | 188 words | ~195 min left in chain
+2026-11-11 19:09:19 INFO chain 0 iter 16/40: judge 183.8s rewrite 132.0s | 141 words | ~104 min left in chain
+2026-11-11 19:09:44 INFO chain 3 iter 22/40: judge 175.0s rewrite 26.6s | 134 words | ~55 min left in chain
+2026-11-11 19:12:00 INFO chain 5 iter 20/40: judge 292.5s rewrite 18.4s | 83 words | ~76 min left in chain
+2026-11-11 19:12:09 INFO chain 2 iter 18/40: judge 154.8s rewrite 151.5s | 130 words | ~85 min left in chain
+2026-11-11 19:13:06 INFO chain 4 iter 18/40: judge 210.4s rewrite 31.2s | 176 words | ~137 min left in chain
+2026-11-11 19:13:22 INFO chain 3 iter 23/40: judge 187.0s rewrite 30.6s | 137 words | ~54 min left in chain
+2026-11-11 19:14:34 INFO chain 0 iter 17/40: judge 256.4s rewrite 59.3s | 140 words | ~107 min left in chain
+2026-11-11 19:15:10 INFO chain 1 iter 15/40: judge 284.9s rewrite 94.7s | 188 words | ~182 min left in chain
+2026-11-11 19:16:00 INFO chain 5 iter 21/40: judge 223.9s rewrite 16.0s | 91 words | ~73 min left in chain
+2026-11-11 19:17:13 INFO chain 2 iter 19/40: judge 207.9s rewrite 96.5s | 118 words | ~87 min left in chain
+2026-11-11 19:17:28 INFO chain 4 iter 19/40: judge 220.8s rewrite 41.4s | 173 words | ~118 min left in chain
+2026-11-11 19:18:29 INFO chain 3 iter 24/40: judge 276.6s rewrite 30.5s | 141 words | ~57 min left in chain
+2026-11-11 19:20:11 INFO chain 5 iter 22/40: judge 225.4s rewrite 25.8s | 88 words | ~70 min left in chain
+2026-11-11 19:20:16 INFO chain 0 iter 18/40: judge 213.1s rewrite 127.9s | 141 words | ~108 min left in chain
+2026-11-11 19:20:54 INFO chain 1 iter 16/40: judge 189.7s rewrite 154.4s | 186 words | ~162 min left in chain
+2026-11-11 19:21:25 INFO chain 4 iter 20/40: judge 203.5s rewrite 33.6s | 177 words | ~104 min left in chain
+2026-11-11 19:23:23 INFO chain 3 iter 25/40: judge 262.5s rewrite 32.2s | 139 words | ~57 min left in chain
+2026-11-11 19:25:17 INFO chain 5 iter 23/40: judge 281.7s rewrite 24.4s | 95 words | ~70 min left in chain
+2026-11-11 19:25:21 INFO chain 0 iter 19/40: judge 220.5s rewrite 84.8s | 145 words | ~104 min left in chain
+2026-11-11 19:26:21 INFO chain 1 iter 17/40: judge 228.6s rewrite 98.0s | 172 words | ~148 min left in chain
+2026-11-11 19:26:32 INFO chain 4 iter 21/40: judge 276.6s rewrite 30.4s | 175 words | ~99 min left in chain
+2026-11-11 19:28:31 INFO chain 3 iter 26/40: judge 270.9s rewrite 36.4s | 149 words | ~56 min left in chain
+2026-11-11 19:29:51 INFO chain 5 iter 24/40: judge 249.4s rewrite 25.0s | 94 words | ~67 min left in chain
+2026-11-11 19:30:53 INFO chain 0 iter 20/40: judge 226.2s rewrite 105.9s | 142 words | ~101 min left in chain
+2026-11-11 19:31:17 INFO chain 4 iter 22/40: judge 242.5s rewrite 42.4s | 177 words | ~92 min left in chain
+2026-11-11 19:31:52 INFO chain 1 iter 18/40: judge 233.2s rewrite 98.0s | 171 words | ~138 min left in chain
+2026-11-11 19:33:06 INFO chain 2 iter 20/40: judge 284.6s rewrite 62.5s | 99 words | ~130 min left in chain
+2026-11-11 19:34:41 INFO chain 5 iter 25/40: judge 257.1s rewrite 32.4s | 98 words | ~64 min left in chain
+2026-11-11 19:36:30 INFO chain 4 iter 23/40: judge 261.1s rewrite 52.0s | 162 words | ~87 min left in chain
+2026-11-11 19:36:53 INFO chain 0 iter 21/40: judge 259.6s rewrite 100.5s | 138 words | ~98 min left in chain
+2026-11-11 19:37:38 INFO chain 1 iter 19/40: judge 248.3s rewrite 98.1s | 174 words | ~130 min left in chain
+2026-11-11 19:37:50 INFO chain 3 iter 27/40: judge 215.7s rewrite 41.0s | 149 words | ~60 min left in chain
+2026-11-11 19:41:10 INFO chain 4 iter 24/40: judge 236.5s rewrite 43.4s | 173 words | ~81 min left in chain
+2026-11-11 19:42:16 INFO chain 0 iter 22/40: judge 223.2s rewrite 99.7s | 167 words | ~94 min left in chain
+2026-11-11 19:42:54 INFO chain 1 iter 20/40: judge 204.7s rewrite 110.7s | 181 words | ~121 min left in chain
+2026-11-11 19:42:58 INFO chain 3 iter 28/40: judge 264.8s rewrite 44.1s | 149 words | ~56 min left in chain
+2026-11-11 19:44:19 INFO chain 2 iter 21/40: judge 267.1s rewrite 103.7s | 98 words | ~138 min left in chain
+2026-11-11 19:46:12 INFO chain 4 iter 25/40: judge 257.4s rewrite 45.0s | 158 words | ~76 min left in chain
+2026-11-11 19:47:28 INFO chain 3 iter 29/40: judge 227.1s rewrite 42.9s | 143 words | ~52 min left in chain
+2026-11-11 19:47:45 INFO chain 0 iter 23/40: judge 238.4s rewrite 91.1s | 171 words | ~89 min left in chain
+2026-11-11 19:49:05 INFO chain 5 iter 26/40: judge 231.3s rewrite 26.5s | 94 words | ~75 min left in chain
+2026-11-11 19:49:18 INFO chain 1 iter 21/40: judge 273.4s rewrite 110.7s | 178 words | ~116 min left in chain
+2026-11-11 19:50:34 INFO chain 2 iter 22/40: judge 290.7s rewrite 84.2s | 99 words | ~128 min left in chain
+2026-11-11 19:51:01 INFO chain 4 iter 26/40: judge 239.7s rewrite 49.1s | 155 words | ~71 min left in chain

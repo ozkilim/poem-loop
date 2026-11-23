@@ -1,0 +1,13 @@
+system: null
+writer: |-
+  Write the perfect haiku.
+judge: |-
+  Poem:
+  {poem}
+  One sentence of feedback.
+judge_knows_goal: |-
+  {poem}
+rewriter: |-
+  {poem}
+  Feedback: {feedback}
+  Rewrite it. Output only the poem.

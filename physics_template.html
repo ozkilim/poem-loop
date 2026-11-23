@@ -1,0 +1,267 @@
+<title>Poem Loop Phase Diagram</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column like a lab notebook: findings, then the temperature sweep (phase diagram), then basin mapping, then the strict T=0 control, then method. Temperature = cold-to-hot ramp; starting poems = mineral colours. */
+:root{
+  --bg:#f3f4f2; --surface:#ffffff; --fg:#1f2421; --mute:#5f6862; --faint:#d9ddd9; --grid:#e7eae7;
+  --t0:#2b5c9e; --t1:#3f8fb5; --t2:#6aa58a; --t3:#c9a227; --t4:#d9702b; --t5:#b8322a;
+  --c0:#1f6f6a; --c1:#b5521f; --c2:#5a5fb0; --c3:#7b8a2a; --c4:#9a3f78; --c5:#4a4f4c;
+  --band:#e9ece9;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141716; --surface:#1b1f1d; --fg:#e6e9e6; --mute:#9aa49e; --faint:#2f3532; --grid:#262b28;
+  --t0:#6f9fe0; --t1:#6cc0e0; --t2:#8fd0b0; --t3:#e6c450; --t4:#f09455; --t5:#ef6a5f;
+  --c0:#4fb3aa; --c1:#e48a55; --c2:#9196e6; --c3:#b4c35a; --c4:#d27ab3; --c5:#b9c0bb;
+  --band:#202523; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141716; --surface:#1b1f1d; --fg:#e6e9e6; --mute:#9aa49e; --faint:#2f3532; --grid:#262b28;
+  --t0:#6f9fe0; --t1:#6cc0e0; --t2:#8fd0b0; --t3:#e6c450; --t4:#f09455; --t5:#ef6a5f;
+  --c0:#4fb3aa; --c1:#e48a55; --c2:#9196e6; --c3:#b4c35a; --c4:#d27ab3; --c5:#b9c0bb;
+  --band:#202523; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:52px}
+h1{font:600 clamp(30px,5vw,46px)/1.1 var(--serif);margin:10px 0 0;text-wrap:balance;letter-spacing:-.01em}
+h2{font:600 24px/1.25 var(--serif);margin:0 0 6px;text-wrap:balance}
+h3{font:600 14.5px/1.3 var(--sans);margin:0}
+.lede{font-size:17px;color:var(--mute);max-width:64ch;margin:12px 0 0}
+.label{font:500 11.5px/1 var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.sub{color:var(--mute);max-width:68ch;margin:0 0 20px}
+.meta{margin-top:14px;font-size:12.5px;color:var(--mute)}
+section{min-width:0}
+
+.findings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 36px;margin-top:18px}
+.finding:first-child{grid-column:1/-1;max-width:72ch}
+.finding:first-child b{font-size:19px}
+@media (max-width:640px){.findings{grid-template-columns:1fr}}
+.finding{min-width:0}
+.finding b{display:block;font:600 16.5px/1.35 var(--serif);margin-bottom:4px}
+.finding p{margin:0;color:var(--mute);font-size:14.5px}
+
+.charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 32px}
+.charts.four{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+@media (max-width:860px){.charts.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.charts,.charts.four{grid-template-columns:1fr}}
+.chart{min-width:0}
+.chart p{margin:2px 0 8px;color:var(--mute);font-size:13px}
+.charts.four .chart p{min-height:2.7em}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart text{fill:var(--mute);font:11px var(--mono)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 18px;font-size:13px}
+.legend span{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--faint);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:8px 12px;border-bottom:1px solid var(--faint);text-align:left;vertical-align:top}
+th{font:500 11.5px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.title{font-family:var(--serif);font-style:italic}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tab{font:500 13px var(--sans);color:var(--fg);background:transparent;border:1px solid var(--faint);border-radius:999px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:7px}
+.tab[aria-pressed="true"]{background:var(--surface);border-color:var(--fg)}
+.tab:focus-visible{outline:2px solid var(--c0);outline-offset:2px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:720px){.pair{grid-template-columns:1fr}}
+.sheet{background:var(--surface);border:1px solid var(--faint);border-radius:6px;padding:20px 22px;min-width:0}
+.sheet .label{display:flex;justify-content:space-between;gap:8px;margin-bottom:12px}
+.poem{font:16px/1.62 var(--serif);white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.poem strong{font-weight:600}
+.note{background:var(--band);border-radius:6px;padding:16px 20px;max-width:72ch}
+.note p{margin:0}
+.method{color:var(--mute);font-size:13.5px;max-width:72ch}
+.method dt{font-weight:600;color:var(--fg);margin-top:10px}
+.method dd{margin:2px 0 0}
+footer{color:var(--mute);font-size:12.5px;border-top:1px solid var(--faint);padding-top:16px}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="label">Recursive poem loop · experiment 2</div>
+    <h1>Poem Loop Phase Diagram</h1>
+    <p class="lede">The first run showed a loop that never stops moving yet keeps falling into the same dark style. Here we treat it as a noisy dynamical system: turn the noise (sampling temperature) up and down to look for a frozen phase, and drop very different starting poems in to see whether they share one attractor.</p>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <section>
+    <h2>What we found</h2>
+    <div class="findings">__FINDINGS__</div>
+  </section>
+
+  <section id="sweep">
+    <h2>A. Turning the noise up and down</h2>
+    <p class="sub">Every chain starts from the same poem (“The Quiet Engine”, run 1’s first draft) and runs 60 rounds. Only the sampling temperature changes, for both the critic and the rewriter. Three seeds per temperature. Each dot is one chain; the line joins the averages.</p>
+    <div class="charts four">
+      <div class="chart"><h3>How much each step keeps</h3><p>Mean similarity to the previous poem, second half.</p><svg id="op-step"></svg></div>
+      <div class="chart"><h3>Frozen share</h3><p>Share of late steps that keep ≥ 95%.</p><svg id="op-frozen"></svg></div>
+      <div class="chart"><h3>Memory</h3><p>Similarity to the poem 12 rounds earlier.</p><svg id="op-mem"></svg></div>
+      <div class="chart"><h3>Twins at the end</h3><p>Same start, different seed: similarity at the last round.</p><svg id="op-twin"></svg></div>
+    </div>
+    <div class="legend" id="leg-t" style="margin-top:28px"></div>
+    <div class="charts">
+      <div class="chart"><h3>Step similarity over time</h3><p>Average over the seeds at each temperature. Dashed line: 0.95.</p><svg id="ts-step"></svg></div>
+      <div class="chart"><h3>Twin divergence</h3><p>Similarity between twin chains at the same round. All twins start identical (1.0).</p><svg id="ts-twin"></svg></div>
+      <div class="chart"><h3>Fading memory</h3><p>Similarity to the poem <i>lag</i> rounds earlier, second half of each chain.</p><svg id="ts-mem"></svg></div>
+      <div class="chart"><h3>Toward run 1’s end state</h3><p>Attractor index (see method). Grey band: where run 1 started and ended.</p><svg id="ts-attr"></svg></div>
+    </div>
+  </section>
+
+  <section id="basin">
+    <h2>B. Different starting poems</h2>
+    <p class="sub">Six starting poems at the original temperature (0.8), two seeds each, 60 rounds. The last one is run 1’s final poem, to test whether the end state holds once a chain is in it.</p>
+    <div class="legend" id="leg-b"></div>
+    <div class="charts">
+      <div class="chart"><h3>Toward run 1’s end state</h3><p>Attractor index, average of the two seeds. Grey band: run 1 start to end.</p><svg id="b-attr"></svg></div>
+      <div class="chart"><h3>Rhyme</h3><p>Share of lines that rhyme with another line.</p><svg id="b-rhyme"></svg></div>
+      <div class="chart"><h3>People in the poem</h3><p>Count of we, I, you, love, heart, soul, hand.</p><svg id="b-human"></svg></div>
+      <div class="chart"><h3>Length in words</h3><p>Average of the two seeds.</p><svg id="b-words"></svg></div>
+    </div>
+    <div class="tablebox" style="margin-top:28px"><table id="b-table"></table></div>
+    <div style="margin-top:28px">
+      <h3 style="margin-bottom:10px">First and last poem</h3>
+      <div class="tabs" id="b-tabs"></div>
+      <div class="pair">
+        <div class="sheet"><div class="label"><span>Start</span><span id="b-l0"></span></div><pre class="poem" id="b-p0"></pre></div>
+        <div class="sheet"><div class="label"><span>Round <span id="b-n"></span></span><span id="b-l1"></span></div><pre class="poem" id="b-p1"></pre></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="t0">
+    <h2>C. Strict zero temperature</h2>
+    <p class="sub">The same start at T = 0, one request at a time with nothing else on the server, two chains. If the map is truly deterministic the two chains are identical, and a deterministic map on a finite set of texts must eventually freeze or cycle.</p>
+    <div class="note" id="t0-note"></div>
+  </section>
+
+  <section>
+    <h2>Method</h2>
+    <dl class="method">
+      <dt>Similarity</dt><dd>Python difflib ratio on the poem text: 1 means identical, about 0.2 is what two unrelated poems from this model share.</dd>
+      <dt>Second half</dt><dd>Rounds 30 to 60, after the early fast drift.</dd>
+      <dt>Attractor index</dt><dd>Word-count cosine to the average of run 1’s last 10 poems in every chain, minus cosine to the average of its first 5. Run 1 itself went from about −0.35 to +0.33. Above zero means the vocabulary is closer to where run 1 ended up. It is a word-level stand-in for “style”, since no embedding model was available.</dd>
+      <dt>Twins</dt><dd>Chains with the same start and temperature but a different seed. At T = 0 the seed has no effect, so any difference there comes from the server batching requests together.</dd>
+    </dl>
+  </section>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const D = __DATA__;
+const esc = s => (s || "").replace(/[&<>]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;"}[c]));
+const fmtPoem = p => esc(p).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+const avg = a => a.length ? a.reduce((s, v) => s + v, 0) / a.length : null;
+const f2 = v => v == null ? "–" : v.toFixed(2);
+document.getElementById("meta").textContent = D.meta.line;
+document.getElementById("foot").textContent = D.meta.foot;
+
+function chart(id, series, xd, yd, xt, yt, opt = {}) {
+  const W = opt.w || 480, H = opt.h || 220, L = 38, R = 10, T = 10, B = 26;
+  const x = v => L + (v - xd[0]) / (xd[1] - xd[0]) * (W - L - R);
+  const y = v => T + (1 - (Math.max(yd[0], Math.min(yd[1], v)) - yd[0]) / (yd[1] - yd[0])) * (H - T - B);
+  let s = "";
+  if (opt.band) s += `<rect x="${L}" width="${W - L - R}" y="${y(opt.band[1])}" height="${y(opt.band[0]) - y(opt.band[1])}" fill="var(--band)"/>`;
+  for (const t of yt) s += `<line x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}" stroke="var(--grid)" fill="none"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${t}</text>`;
+  for (const t of xt.filter(t => t >= xd[0] && t <= xd[1])) s += `<text x="${x(t)}" y="${H - 7}" text-anchor="middle">${t}</text>`;
+  if (opt.ref != null) s += `<line x1="${L}" x2="${W - R}" y1="${y(opt.ref)}" y2="${y(opt.ref)}" stroke="var(--mute)" stroke-dasharray="4 4" fill="none"/>`;
+  for (const se of series) {
+    const pts = se.pts.filter(p => p[1] != null);
+    if (!pts.length) continue;
+    if (se.dots) for (const p of pts) s += `<circle cx="${x(p[0]).toFixed(1)}" cy="${y(p[1]).toFixed(1)}" r="3.4" fill="${se.color}" fill-opacity=".55"/>`;
+    else {
+      s += `<polyline points="${pts.map(p => `${x(p[0]).toFixed(1)},${y(p[1]).toFixed(1)}`).join(" ")}" fill="none" stroke="${se.color}" stroke-width="${se.w || 1.9}" stroke-linejoin="round"${se.dash ? ' stroke-dasharray="5 4"' : ""}/>`;
+      if (se.end !== false) { const p = pts[pts.length - 1]; s += `<circle cx="${x(p[0])}" cy="${y(p[1])}" r="3" fill="${se.color}"/>`; }
+    }
+  }
+  const el = document.getElementById(id);
+  el.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  el.setAttribute("role", "img");
+  el.innerHTML = s;
+}
+const range = (a, b, st) => Array.from({length: Math.round((b - a) / st) + 1}, (_, i) => +(a + i * st).toFixed(2));
+const meanSeries = (chains, key) => {
+  const n = Math.max(...chains.map(c => c.rows.length));
+  return Array.from({length: n}, (_, t) => [t, avg(chains.map(c => c.rows[t] && c.rows[t][key]).filter(v => v != null))]);
+};
+
+// ---------- A: temperature sweep ----------
+const S = D.sweep;
+if (!S) document.getElementById("sweep").hidden = true; else {
+  const temps = [...new Set(S.chains.map(c => c.temperature))].sort((a, b) => a - b);
+  const tcol = T => `var(--t${Math.min(5, temps.indexOf(T))})`;
+  const twinEnd = T => S.twins.filter(tw => tw.temperature === T).map(tw => tw.sim[tw.sim.length - 1]);
+  const ops = [
+    ["op-step", c => c.late_step, [0.5, 1], range(0.5, 1, 0.1)],
+    ["op-frozen", c => c.frozen, [0, 1], range(0, 1, 0.25)],
+    ["op-mem", c => c.memory["12"], [0, 1], range(0, 1, 0.25)],
+  ];
+  const xd = [0, 1.2], xt = [0, 0.4, 0.8, 1.2];
+  for (const [id, get, yd, yt] of ops) {
+    const dots = S.chains.map(c => [c.temperature, get(c)]);
+    const line = temps.map(T => [T, avg(S.chains.filter(c => c.temperature === T).map(get).filter(v => v != null))]);
+    chart(id, [{pts: dots, dots: true, color: "var(--mute)"}, {pts: line, color: "var(--fg)", w: 1.6, end: false}], xd, yd, xt, yt, {w: 260, h: 210});
+  }
+  chart("op-twin", [{pts: temps.flatMap(T => twinEnd(T).map(v => [T, v])), dots: true, color: "var(--mute)"},
+                    {pts: temps.map(T => [T, avg(twinEnd(T))]), color: "var(--fg)", w: 1.6, end: false}], xd, [0, 1], xt, range(0, 1, 0.25), {w: 260, h: 210});
+  document.getElementById("leg-t").innerHTML = temps.map(T => `<span><span class="dot" style="background:${tcol(T)}"></span>T = ${T}</span>`).join("");
+  const iters = Math.max(...S.chains.map(c => c.rows.length)) - 1;
+  const xtI = range(0, iters, iters > 40 ? 20 : 10);
+  chart("ts-step", temps.map(T => ({pts: meanSeries(S.chains.filter(c => c.temperature === T), "step"), color: tcol(T)})), [0, iters], [0.4, 1], xtI, range(0.4, 1, 0.2), {ref: 0.95});
+  chart("ts-twin", temps.map(T => {
+    const tw = S.twins.filter(t => t.temperature === T);
+    const n = Math.max(0, ...tw.map(t => t.sim.length));
+    return {pts: Array.from({length: n}, (_, t) => [t, avg(tw.map(x => x.sim[t]).filter(v => v != null))]), color: tcol(T)};
+  }), [0, iters], [0, 1], xtI, range(0, 1, 0.25));
+  const lags = [1, 2, 3, 5, 8, 12, 20];
+  chart("ts-mem", temps.map(T => ({pts: lags.map(L => [L, avg(S.chains.filter(c => c.temperature === T).map(c => c.memory[L]).filter(v => v != null))]), color: tcol(T)})),
+        [0, 20], [0, 1], [1, 5, 10, 15, 20], range(0, 1, 0.25));
+  chart("ts-attr", temps.map(T => ({pts: meanSeries(S.chains.filter(c => c.temperature === T), "attr"), color: tcol(T)})), [0, iters], [-0.5, 0.5], xtI, range(-0.5, 0.5, 0.25), {band: D.meta.refBand});
+}
+
+// ---------- B: basin mapping ----------
+const Bx = D.basin;
+if (!Bx) document.getElementById("basin").hidden = true; else {
+  const labels = [...new Set(Bx.chains.map(c => c.label))];
+  const NAMES = {limerick: "Limerick", nursery: "Nursery rhyme", prose: "Prose paragraph", random_words: "Random words", sonnet: "Love sonnet", end_state: "Run 1 end state"};
+  const nm = l => NAMES[l] || l;
+  const bcol = l => `var(--c${labels.indexOf(l) % 6})`;
+  document.getElementById("leg-b").innerHTML = labels.map(l => `<span><span class="dot" style="background:${bcol(l)}"></span>${nm(l)}</span>`).join("");
+  const iters = Math.max(...Bx.chains.map(c => c.rows.length)) - 1;
+  const xtI = range(0, iters, iters > 40 ? 20 : 10);
+  const grp = l => Bx.chains.filter(c => c.label === l);
+  chart("b-attr", labels.map(l => ({pts: meanSeries(grp(l), "attr"), color: bcol(l)})), [0, iters], [-0.5, 0.5], xtI, range(-0.5, 0.5, 0.25), {band: D.meta.refBand});
+  chart("b-rhyme", labels.map(l => ({pts: meanSeries(grp(l), "rhyme"), color: bcol(l)})), [0, iters], [0, 1], xtI, range(0, 1, 0.25));
+  const hMax = Math.max(4, ...Bx.chains.flatMap(c => c.rows.map(r => r.human)));
+  const hTop = Math.ceil(hMax / 5) * 5;
+  chart("b-human", labels.map(l => ({pts: meanSeries(grp(l), "human"), color: bcol(l)})), [0, iters], [0, hTop], xtI, range(0, hTop, hTop > 10 ? 5 : 2));
+  const wMax = Math.max(...Bx.chains.flatMap(c => c.rows.map(r => r.words)));
+  const wTop = Math.ceil(wMax / 50) * 50;
+  chart("b-words", labels.map(l => ({pts: meanSeries(grp(l), "words"), color: bcol(l)})), [0, iters], [0, wTop], xtI, range(0, wTop, 50));
+  let tb = `<tr><th>Start</th><th>Seed</th><th>Rounds</th><th>Attractor index start → end</th><th>Rhyme end</th><th>People end</th><th>Final title</th></tr>`;
+  for (const c of Bx.chains) tb += `<tr><td><span class="dot" style="background:${bcol(c.label)};display:inline-block;margin-right:6px"></span>${nm(c.label)}</td><td class="num">${c.seed}</td><td class="num">${c.n - 1}</td><td class="num">${c.rows[0].attr >= 0 ? "+" : ""}${f2(c.rows[0].attr)} → ${c.end_attr >= 0 ? "+" : ""}${f2(c.end_attr)}</td><td class="num">${f2(c.end_rhyme)}</td><td class="num">${c.end_human.toFixed(1)}</td><td class="title">${esc(c.last_title)}</td></tr>`;
+  document.getElementById("b-table").innerHTML = tb;
+  const box = document.getElementById("b-tabs");
+  box.innerHTML = Bx.chains.map((c, i) => `<button class="tab" data-i="${i}" aria-pressed="false"><span class="dot" style="background:${bcol(c.label)}"></span>${nm(c.label)} · ${c.seed}</button>`).join("");
+  const pick = i => {
+    for (const b of box.children) b.setAttribute("aria-pressed", +b.dataset.i === i);
+    const c = Bx.chains[i];
+    document.getElementById("b-p0").innerHTML = fmtPoem(c.first);
+    document.getElementById("b-p1").innerHTML = fmtPoem(c.last);
+    document.getElementById("b-n").textContent = c.n - 1;
+    document.getElementById("b-l0").textContent = `${c.rows[0].words} words`;
+    document.getElementById("b-l1").textContent = `${c.rows[c.n - 1].words} words`;
+  };
+  box.onclick = e => { const b = e.target.closest(".tab"); if (b) pick(+b.dataset.i); };
+  pick(0);
+}
+
+// ---------- C: strict T=0 ----------
+document.getElementById("t0-note").innerHTML = D.t0note || "<p>This control starts after experiments A and B finish. Not run yet.</p>";
+</script>

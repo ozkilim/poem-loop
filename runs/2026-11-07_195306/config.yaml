@@ -1,0 +1,18 @@
+# effective config (CLI overrides applied)
+base_url: http://localhost:8080/v1
+model: qwen3:14b
+disable_thinking: true
+embedding_model: null
+embedding_base_url: null
+chains: 1
+iterations: 1
+base_seed: 42
+temperature: 0.8
+top_p: 0.95
+max_tokens_poem: 800
+max_tokens_feedback: 800
+request_timeout_s: 300
+max_retries: 3
+judge_knows_goal: false
+early_stop_on_exact_repeat: false
+out_dir: runs/

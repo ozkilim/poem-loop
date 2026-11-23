@@ -1,0 +1,255 @@
+<title>The Perfect Poem Loop</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column of "strata": status, findings, charts, then/now, explorer. Stone neutrals, chain colours drawn from minerals. */
+:root{
+  --bg:#f3f4f2; --surface:#ffffff; --fg:#1f2421; --mute:#5f6862; --faint:#d9ddd9; --grid:#e7eae7;
+  --c0:#1f6f6a; --c1:#b5521f; --c2:#5a5fb0; --c3:#7b8a2a; --c4:#9a3f78;
+  --add-bg:#dcefe2; --add-fg:#1d5a32; --del-bg:#f6e0dc; --del-fg:#8c2f22;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141716; --surface:#1b1f1d; --fg:#e6e9e6; --mute:#9aa49e; --faint:#2f3532; --grid:#262b28;
+  --c0:#4fb3aa; --c1:#e48a55; --c2:#9196e6; --c3:#b4c35a; --c4:#d27ab3;
+  --add-bg:#173826; --add-fg:#9fe0b4; --del-bg:#3d1d18; --del-fg:#f2a99c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141716; --surface:#1b1f1d; --fg:#e6e9e6; --mute:#9aa49e; --faint:#2f3532; --grid:#262b28;
+  --c0:#4fb3aa; --c1:#e48a55; --c2:#9196e6; --c3:#b4c35a; --c4:#d27ab3;
+  --add-bg:#173826; --add-fg:#9fe0b4; --del-bg:#3d1d18; --del-fg:#f2a99c; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:48px}
+h1{font:600 clamp(30px,5vw,46px)/1.1 var(--serif);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font:600 22px/1.25 var(--serif);margin:0 0 6px;text-wrap:balance}
+.lede{font-size:17px;color:var(--mute);max-width:62ch;margin:10px 0 0}
+.label{font:500 11.5px/1 var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.sub{color:var(--mute);max-width:66ch;margin:0 0 18px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* status */
+.status{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{display:flex;align-items:center;gap:8px;border:1px solid var(--faint);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.bar{width:64px;height:5px;background:var(--grid);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%}
+.meta{margin-top:12px;font-size:12.5px;color:var(--mute)}
+
+/* findings */
+.findings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 36px;margin-top:18px}
+.finding:first-child{grid-column:1/-1;max-width:70ch}
+.finding:first-child b{font-size:19px}
+@media (max-width:640px){.findings{grid-template-columns:1fr}}
+.finding{min-width:0}
+.finding b{display:block;font:600 16.5px/1.35 var(--serif);margin-bottom:4px}
+.finding p{margin:0;color:var(--mute);font-size:14.5px}
+
+/* charts */
+.charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px}
+@media (max-width:720px){.charts{grid-template-columns:1fr}}
+.chart h3{font:600 14.5px/1.3 var(--sans);margin:0}
+.chart p{margin:2px 0 8px;color:var(--mute);font-size:13px}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart text{fill:var(--mute);font:11px var(--mono)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px;font-size:13px}
+.legend span{display:flex;align-items:center;gap:6px}
+
+/* then / now */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tab{font:500 13px var(--sans);color:var(--fg);background:transparent;border:1px solid var(--faint);border-radius:999px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:7px}
+.tab[aria-pressed="true"]{background:var(--surface);border-color:var(--fg)}
+.tab:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--c0);outline-offset:2px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:720px){.pair{grid-template-columns:1fr}}
+.sheet{background:var(--surface);border:1px solid var(--faint);border-radius:6px;padding:20px 22px;min-width:0}
+.sheet .label{display:flex;justify-content:space-between;gap:8px;margin-bottom:12px}
+.poem{font:16px/1.62 var(--serif);white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.poem strong{font-weight:600}
+
+/* explorer */
+.ctrl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:14px}
+.ctrl input[type=range]{flex:1;min-width:180px;accent-color:var(--c0)}
+.ctrl button.step{font:500 14px var(--sans);background:var(--surface);color:var(--fg);border:1px solid var(--faint);border-radius:6px;padding:4px 10px;cursor:pointer}
+.readout{font:13px var(--mono);color:var(--mute);font-variant-numeric:tabular-nums}
+.toggle{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mute)}
+ins{background:var(--add-bg);color:var(--add-fg);text-decoration:none;border-radius:2px}
+del{background:var(--del-bg);color:var(--del-fg);border-radius:2px}
+.fb{font:14px/1.6 var(--sans);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--fg);max-height:420px;overflow:auto;margin:0}
+.cross{border-collapse:collapse;font:13px var(--mono);font-variant-numeric:tabular-nums}
+.cross td,.cross th{padding:6px 10px;border:1px solid var(--faint);text-align:center}
+.cross th{font-weight:500;color:var(--mute)}
+.tablebox{overflow-x:auto}
+footer{color:var(--mute);font-size:12.5px;border-top:1px solid var(--faint);padding-top:16px}
+@media (prefers-reduced-motion:no-preference){.sheet{transition:border-color .2s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="label">Recursive poem experiment · one local model, every call fresh</div>
+    <h1 style="margin-top:10px">The Perfect Poem Loop</h1>
+    <p class="lede">A local Qwen model was asked to “write the perfect poem”. A fresh copy of the same model then critiques it, and another fresh copy rewrites it using only that critique. This repeats 100 times per chain. Where does the poem end up?</p>
+    <div class="status" id="status"></div>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <section>
+    <h2>What we found</h2>
+    <div class="findings">
+      <div class="finding"><b>It never settles. It erodes.</b><p>None of the five chains converged, and none ever repeated a poem. Each rewrite keeps about 90% of the previous poem’s text, so every step looks like polishing. After 100 small steps only 12–28% of the original poem is left.</p></div>
+      <div class="finding"><b>Rhyme dies everywhere</b><p>All five chains start as rhymed, consoling poems; the share of rhyming lines falls from 29–56% to 0–11%. Length also roughly halves, to 51–93 words, mostly in the first 20 rounds.</p></div>
+      <div class="finding"><b>People disappear</b><p>In four of five chains “we”, “love”, “heart” and “hands” vanish for good: by round 21, 40, 68 and 68. Only chain 1 keeps a pair of palms, holding up a lintel.</p></div>
+      <div class="finding"><b>Different words, one destination</b><p>The final poems share only about 23% of their wording, yet all five land in the same style: “The Valley’s Jaw”, “Lintel”, “The Maw”, “Asphyxiation”, “The Cold Weld”. Jaws, throats, gullets, rust, frost and stone. The model’s “perfect poem” is a style, not a text.</p></div>
+      <div class="finding"><b>The critic never runs out of notes</b><p>Of 500 critiques, 437 ask to cut clichés and 379 warn about abstraction; none asks for rhyme. Every round it praises the poem, then pushes it a little harder and darker. That steady current is what the poems drift on.</p></div>
+</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The drift, measured</h2>
+    <p class="sub">One line per chain. Text similarity is the share of characters that match (difflib ratio), where 1 means identical.</p>
+    <div class="charts">
+      <div class="chart"><h3>Similarity to the previous poem</h3><p>Above the dashed 0.95 line for 10 rounds in a row would count as converged.</p><svg id="ch-prev"></svg></div>
+      <div class="chart"><h3>Similarity to the first poem</h3><p>How much of the original survives.</p><svg id="ch-orig"></svg></div>
+      <div class="chart"><h3>Length in words</h3><p>Cut, tighten, trim: the critic asks for it almost every round.</p><svg id="ch-words"></svg></div>
+      <div class="chart"><h3>People in the poem</h3><p>Count of we, us, I, you, love, heart, soul, hand.</p><svg id="ch-human"></svg></div>
+    </div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section>
+    <h2>Then and now</h2>
+    <p class="sub">The first poem each chain wrote, beside its latest version.</p>
+    <div class="tabs" id="tabs-pair" role="group" aria-label="Chain"></div>
+    <div class="pair">
+      <div class="sheet"><div class="label"><span>Poem 0</span><span class="mono" id="p0meta"></span></div><pre class="poem" id="p0"></pre></div>
+      <div class="sheet"><div class="label"><span id="pNlabel">Latest</span><span class="mono" id="pNmeta"></span></div><pre class="poem" id="pN"></pre></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Step through it</h2>
+    <p class="sub">Pick a chain and drag through the rounds, or use the ← and → keys. Turn on “Show changes” to see what the last rewrite changed.</p>
+    <div class="tabs" id="tabs-x" role="group" aria-label="Chain"></div>
+    <div class="ctrl">
+      <button class="step" id="prev" aria-label="Previous round">←</button>
+      <input type="range" id="slider" min="0" value="0" aria-label="Round">
+      <button class="step" id="next" aria-label="Next round">→</button>
+      <label class="toggle"><input type="checkbox" id="showdiff"> Show changes</label>
+    </div>
+    <div class="readout" id="readout" style="margin-bottom:12px"></div>
+    <div class="pair">
+      <div class="sheet"><div class="label"><span id="xlabel">Poem</span></div><pre class="poem" id="xpoem"></pre></div>
+      <div class="sheet"><div class="label"><span>Critic’s feedback on this poem</span></div><pre class="fb" id="xfb"></pre></div>
+    </div>
+  </section>
+
+  <section id="cross-sec">
+    <h2>Do chains end up in the same place?</h2>
+    <p class="sub">Text similarity between each chain’s latest poem. Low numbers mean the wording differs. Read them with the final poems: the words diverge while the style converges.</p>
+    <div class="tablebox"><table class="cross" id="cross"></table></div>
+  </section>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+const C = DATA.chains, M = DATA.meta;
+const col = i => `var(--c${i % 5})`;
+const esc = s => (s ?? "").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const fmtPoem = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+// status
+const st = document.getElementById("status");
+for (let i = 0; i < M.nChains; i++) {
+  const c = C.find(x => x.id === i);
+  const done = c ? c.rows[c.rows.length - 1].it : 0;
+  const pct = Math.round(done / M.iters * 100);
+  const state = !c ? "queued" : done >= M.iters ? "done" : `round ${done} of ${M.iters}`;
+  st.insertAdjacentHTML("beforeend",
+    `<span class="chip"><span class="dot" style="background:${c ? col(i) : "var(--faint)"}"></span>Chain ${i}<span class="bar"><i style="width:${pct}%;background:${col(i)}"></i></span><span class="mono" style="color:var(--mute)">${state}</span></span>`);
+}
+document.getElementById("meta").textContent = `Model ${M.model} · run ${M.run} · snapshot ${M.updated}`;
+document.getElementById("foot").textContent = `Snapshot of run ${M.run}, taken ${M.updated}. Built from the chain_*.jsonl logs by report.py.`;
+
+// charts
+function chart(id, key, ymin, ymax, ticks, thresh) {
+  const W = 480, H = 210, L = 36, R = 8, T = 8, B = 24;
+  const x = v => L + v / M.iters * (W - L - R), y = v => T + (1 - (v - ymin) / (ymax - ymin)) * (H - T - B);
+  let s = "";
+  for (const t of ticks) s += `<line x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}" stroke="var(--grid)" fill="none"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${t}</text>`;
+  for (const t of [0, 25, 50, 75, 100].filter(t => t <= M.iters)) s += `<text x="${x(t)}" y="${H - 6}" text-anchor="middle">${t}</text>`;
+  if (thresh != null) s += `<line x1="${L}" x2="${W - R}" y1="${y(thresh)}" y2="${y(thresh)}" stroke="var(--mute)" stroke-dasharray="4 4" fill="none"/>`;
+  for (const c of C) {
+    const pts = c.rows.filter(r => r[key] != null).map(r => `${x(r.it).toFixed(1)},${y(Math.max(ymin, Math.min(ymax, r[key]))).toFixed(1)}`);
+    s += `<polyline points="${pts.join(" ")}" fill="none" stroke="${col(c.id)}" stroke-width="1.8" stroke-linejoin="round"/>`;
+    const last = c.rows[c.rows.length - 1];
+    if (last[key] != null) s += `<circle cx="${x(last.it)}" cy="${y(last[key])}" r="3.2" fill="${col(c.id)}"/>`;
+  }
+  const el = document.getElementById(id);
+  el.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  el.innerHTML = s;
+}
+const maxW = Math.max(...C.flatMap(c => c.rows.map(r => r.words)));
+const maxH = Math.max(4, ...C.flatMap(c => c.rows.map(r => r.human)));
+const step = v => v <= 10 ? 2 : v <= 20 ? 5 : 10;
+chart("ch-prev", "prev", 0.6, 1, [0.6, 0.7, 0.8, 0.9, 1], 0.95);
+chart("ch-orig", "orig", 0, 1, [0, 0.25, 0.5, 0.75, 1]);
+const wTop = Math.ceil(maxW / 50) * 50; chart("ch-words", "words", 0, wTop, Array.from({length: wTop / 50 + 1}, (_, i) => i * 50));
+const hTop = Math.ceil(maxH / step(maxH)) * step(maxH); chart("ch-human", "human", 0, hTop, Array.from({length: hTop / step(maxH) + 1}, (_, i) => i * step(maxH)));
+document.getElementById("legend").innerHTML = C.map(c => `<span><span class="dot" style="background:${col(c.id)}"></span>Chain ${c.id}</span>`).join("");
+
+// tabs
+function tabs(boxId, onPick) {
+  const box = document.getElementById(boxId);
+  box.innerHTML = C.map(c => `<button class="tab" data-id="${c.id}" aria-pressed="false"><span class="dot" style="background:${col(c.id)}"></span>Chain ${c.id}</button>`).join("");
+  box.onclick = e => { const b = e.target.closest(".tab"); if (b) pick(+b.dataset.id); };
+  function pick(id) { for (const b of box.children) b.setAttribute("aria-pressed", +b.dataset.id === id); onPick(id); }
+  pick(C[0].id);
+}
+tabs("tabs-pair", id => {
+  const c = C.find(x => x.id === id), a = c.rows[0], b = c.rows[c.rows.length - 1];
+  document.getElementById("p0").innerHTML = fmtPoem(a.poem);
+  document.getElementById("p0meta").textContent = `${a.words} words`;
+  document.getElementById("pN").innerHTML = fmtPoem(b.poem);
+  document.getElementById("pNlabel").textContent = `Poem ${b.it}${b.it >= M.iters ? " (final)" : " (latest)"}`;
+  document.getElementById("pNmeta").textContent = `${b.words} words · ${Math.round(b.orig * 100)}% like poem 0`;
+});
+
+// explorer
+let xc = C[0], xi = 0;
+const slider = document.getElementById("slider"), showdiff = document.getElementById("showdiff");
+function renderX() {
+  xi = Math.max(0, Math.min(xi, xc.rows.length - 1));
+  const r = xc.rows[xi];
+  slider.max = xc.rows.length - 1; slider.value = xi;
+  slider.style.accentColor = col(xc.id);
+  document.getElementById("xlabel").textContent = `Chain ${xc.id} · poem ${r.it}`;
+  document.getElementById("readout").textContent =
+    `round ${r.it}/${xc.rows[xc.rows.length - 1].it} · ${r.words} words · ${r.lines} lines` +
+    (r.prev != null ? ` · ${Math.round(r.prev * 100)}% like previous` : "") + ` · ${Math.round(r.orig * 100)}% like poem 0`;
+  document.getElementById("xpoem").innerHTML = showdiff.checked && r.diff
+    ? r.diff.map(([op, t]) => op === "=" ? esc(t) : op === "+" ? `<ins>${esc(t)}</ins>` : `<del>${esc(t)}</del>`).join("")
+    : fmtPoem(r.poem);
+  document.getElementById("xfb").textContent = r.fb || "No feedback yet: this is the newest poem in the chain.";
+}
+tabs("tabs-x", id => { const cur = xc.rows[xi]?.it ?? 0; xc = C.find(x => x.id === id); xi = Math.min(cur, xc.rows.length - 1); renderX(); });
+slider.oninput = () => { xi = +slider.value; renderX(); };
+showdiff.onchange = renderX;
+document.getElementById("prev").onclick = () => { xi--; renderX(); };
+document.getElementById("next").onclick = () => { xi++; renderX(); };
+document.addEventListener("keydown", e => {
+  if (["INPUT", "BUTTON"].includes(e.target.tagName) && e.target.type !== "range") return;
+  if (e.key === "ArrowLeft") { xi--; renderX(); e.preventDefault(); }
+  if (e.key === "ArrowRight") { xi++; renderX(); e.preventDefault(); }
+});
+
+// cross table
+const ct = document.getElementById("cross");
+if (C.length < 2) document.getElementById("cross-sec").hidden = true;
+else ct.innerHTML = `<tr><th></th>${C.map(c => `<th>Chain ${c.id}</th>`).join("")}</tr>` +
+  C.map((c, i) => `<tr><th>Chain ${c.id}</th>${M.cross[i].map((v, j) => `<td>${i === j ? "–" : v.toFixed(2)}</td>`).join("")}</tr>`).join("");
+</script>
